@@ -1,4 +1,4 @@
 interface:
-  display_name: "Big Jump"
+  display_name: "BuildBuddy"
   short_description: "Choose, build, and verify a real software project"
-  default_prompt: "Use $big-jump to help me choose or build a realistic software project, validate the next decision, and teach me as we go."
+  default_prompt: "Use $buildbuddy to help me choose or build a realistic software project, validate the next decision, and teach me as we go."

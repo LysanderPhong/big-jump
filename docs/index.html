@@ -3,17 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Big Jump helps students who know some technology but do not know what to build choose a direction and ship a first real software project they can verify and explain.">
+<meta name="description" content="BuildBuddy helps students who know some technology but do not know what to build choose a direction and ship a first real software project they can verify and explain.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Big Jump — from no direction to a first real software project">
-<meta property="og:description" content="Big Jump helps students who know some technology but do not know what to build choose a direction and ship a first real software project they can verify and explain.">
-<meta property="og:image" content="https://lysanderphong.github.io/big-jump/social-card.png">
+<meta property="og:title" content="BuildBuddy — from no direction to a first real software project">
+<meta property="og:description" content="BuildBuddy helps students who know some technology but do not know what to build choose a direction and ship a first real software project they can verify and explain.">
 <meta property="og:image:width" content="1280">
 <meta property="og:image:height" content="640">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://lysanderphong.github.io/big-jump/social-card.png">
-<title>Big Jump — from no direction to a first real software project</title>
+<title>BuildBuddy — from no direction to a first real software project</title>
 <style>
   :root {
     --bg: #f7f7f9;
@@ -107,11 +105,11 @@
 
 <header>
   <span class="badge">Agent Skill · for a first real software project you can explain</span>
-  <h1>Big Jump</h1>
+  <h1>BuildBuddy</h1>
   <p class="tagline">From “I don't know what to build” to a first release you can run, verify, and explain. Bring a rough direction—or no clear idea yet.</p>
   <div class="buttons">
     <a class="btn primary" href="#student-start">I need help choosing a direction</a>
-    <a class="btn" href="https://github.com/LysanderPhong/big-jump">View on GitHub</a>
+    <a class="btn" href="https://github.com/LysanderPhong/buildbuddy">View on GitHub</a>
     <a class="btn" href="#install">How to install</a>
   </div>
 </header>
@@ -124,15 +122,15 @@
       <li>Want credible portfolio evidence or a first software-income experiment, but do not know which real problem to start with?</li>
       <li>Have followed tutorials and completed coursework, but do not know how to find a first user, cut scope, or decide what “done” means?</li>
     </ul>
-    <p>Big Jump turns a coding agent into an autonomous builder-coach. It first helps choose a direction from people and problems you can reach, then scopes, builds, verifies, and teaches one useful concept per phase.</p>
+    <p>BuildBuddy turns a coding agent into an autonomous builder-coach. It first helps choose a direction from people and problems you can reach, then scopes, builds, verifies, and teaches one useful concept per phase.</p>
   </section>
 
   <section id="student-start">
     <h2>From knowing some technology to your own first release</h2>
-    <p>Big Jump began from a gap familiar to many students at China's 985/211 universities: learning plenty without a path from knowledge to a real user; the school label is context, not an entry requirement. Big Jump does not promise that a finished website creates income. It keeps technical correctness, first use, repeated use, and willingness to pay as separate evidence.</p>
+    <p>BuildBuddy began from a gap familiar to many students at China's 985/211 universities: learning plenty without a path from knowledge to a real user; the school label is context, not an entry requirement. BuildBuddy does not promise that a finished website creates income. It keeps technical correctness, first use, repeated use, and willingness to pay as separate evidence.</p>
     <div class="chat">
       <div class="msg user"><b>You</b>I am a university student who knows some Python and frontend development but has only built coursework. I see other people earn from small websites and do not know where to start. Give me no more than three directions from problems around classmates, student groups, or a lab, and recommend one zero-budget default.</div>
-      <div class="msg coach"><b>Big Jump</b>We will not pick a framework or deploy yet. I will identify your primary goal, people you can reach this week, and repeated behavior you can observe; then compare candidates across web, CLI, or data tools, recommend one default, and name the cheapest pre-build test. Once the direction has evidence, we can build the smallest version one real user can try.</div>
+      <div class="msg coach"><b>BuildBuddy</b>We will not pick a framework or deploy yet. I will identify your primary goal, people you can reach this week, and repeated behavior you can observe; then compare candidates across web, CLI, or data tools, recommend one default, and name the cheapest pre-build test. Once the direction has evidence, we can build the smallest version one real user can try.</div>
     </div>
   </section>
 
@@ -154,7 +152,7 @@
     <h2>See the workflow in action</h2>
     <div class="chat">
       <div class="msg user"><b>You</b>Build a macOS and Linux CLI that renames photos by EXIF date. Dry-run by default, handle collisions, and never test on my only copies.</div>
-      <div class="msg coach"><b>Big Jump</b>Route: new build · CLI/automation · destructive-operation overlay. Outcome: preview a deterministic rename plan, then apply it only after explicit confirmation. Non-goals: editing photo contents or testing on originals.<br><br>[Slice 1: parse copy-only fixtures and print a stable dry-run plan.]<br><br>Evidence: unit cases for missing dates and name collisions, plus a real subprocess run in a temporary directory.<br><br>[Slice 2: add confirmed apply, idempotency, interruption recovery, packaging, and a clean-install smoke test.]</div>
+      <div class="msg coach"><b>BuildBuddy</b>Route: new build · CLI/automation · destructive-operation overlay. Outcome: preview a deterministic rename plan, then apply it only after explicit confirmation. Non-goals: editing photo contents or testing on originals.<br><br>[Slice 1: parse copy-only fixtures and print a stable dry-run plan.]<br><br>Evidence: unit cases for missing dates and name collisions, plus a real subprocess run in a temporary directory.<br><br>[Slice 2: add confirmed apply, idempotency, interruption recovery, packaging, and a clean-install smoke test.]</div>
       <div class="msg phase"><b>End</b>Verified on the platforms actually run: dry-run leaves files untouched; confirmed apply handles collisions; a second run makes no further changes; clean installation exposes the command. Any untested platform is named as a limitation, not implied as supported.</div>
     </div>
   </section>
@@ -178,18 +176,18 @@
     <h3>Codex — one command</h3>
     <p>Download the repository and run:</p>
     <pre>bash install.sh</pre>
-    <p>Or copy the complete <code>big-jump</code> folder into <code>~/.codex/skills/</code>. The references, assets, evals, and validation script are part of the skill; copying only <code>SKILL.md</code> is incomplete. The folder must be named <code>big-jump</code>.</p>
+    <p>Or copy the complete <code>buildbuddy</code> folder into <code>~/.codex/skills/</code>. The references, assets, evals, and validation script are part of the skill; copying only <code>SKILL.md</code> is incomplete. The folder must be named <code>buildbuddy</code>.</p>
     <h3>DeepSeek Harness</h3>
-    <p>Put the <code>big-jump</code> folder into <code>.dsh/skills</code> or <code>.agents/skills</code> in your project, or into <code>~/.dsh/skills</code>.</p>
+    <p>Put the <code>buildbuddy</code> folder into <code>.dsh/skills</code> or <code>.agents/skills</code> in your project, or into <code>~/.dsh/skills</code>.</p>
     <h3>Claude Code / Cursor</h3>
     <p>Put the folder into the tool's skills directory (for example <code>~/.claude/skills/</code>, or the <code>.agents/skills</code> project folder).</p>
     <h3>Use it</h3>
-    <p>In a new chat, describe a substantial outcome, such as <em>"Build a safe photo-renaming CLI with dry-run and recovery."</em> If the skill does not load automatically, say <em>"Use the big-jump skill."</em></p>
+    <p>In a new chat, describe a substantial outcome, such as <em>"Build a safe photo-renaming CLI with dry-run and recovery."</em> If the skill does not load automatically, say <em>"Use the buildbuddy skill."</em></p>
   </section>
 </main>
 
 <footer>
-  <p>MIT License · <a href="https://github.com/LysanderPhong/big-jump">github.com/LysanderPhong/big-jump</a></p>
+  <p>MIT License · <a href="https://github.com/LysanderPhong/buildbuddy">github.com/LysanderPhong/buildbuddy</a></p>
 </footer>
 
 </body>

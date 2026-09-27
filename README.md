@@ -1,18 +1,20 @@
-# Big Jump 🚀
+# BuildBuddy 🚀
+
+Previously called **Big Jump**. The skill is now invoked as `$buildbuddy`; new installations use the `buildbuddy` folder. Existing installations are not renamed automatically.
 
 > **From “I don't know what to build” to a verified first release.**
 
-[![check-skill](https://github.com/LysanderPhong/big-jump/actions/workflows/check-skill.yml/badge.svg)](https://github.com/LysanderPhong/big-jump/actions/workflows/check-skill.yml) · 🌐 [Website](https://lysanderphong.github.io/big-jump/) · [中文版 README](README.zh.md)
+[![check-skill](https://github.com/LysanderPhong/buildbuddy/actions/workflows/check-skill.yml/badge.svg)](https://github.com/LysanderPhong/buildbuddy/actions/workflows/check-skill.yml) · 🌐 [Website](https://lysanderphong.github.io/buildbuddy/) · [中文版 README](README.zh.md)
 
-Big Jump turns a coding agent into an autonomous builder-coach. Bring a rough idea—or only the skills you have, a recurring problem around you, and a goal such as a credible portfolio or a first software-income experiment. It helps choose a direction, scopes the smallest useful release, builds in testable slices, and verifies through the real entry point.
+BuildBuddy turns a coding agent into an autonomous builder-coach. Bring a rough idea—or only the skills you have, a recurring problem around you, and a goal such as a credible portfolio or a first software-income experiment. It helps choose a direction, scopes the smallest useful release, builds in testable slices, and verifies through the real entry point.
 
 ## For students who learned to code but still feel stuck
 
-You may know some Python, Java, frontend, or data analysis and have completed plenty of coursework—yet still have nothing a real person can use, test, and hear you explain. Big Jump began from a gap familiar to many students at China's 985/211 universities: learning plenty without a path from knowledge to a real user. The school label is context, not an entry requirement.
+You may know some Python, Java, frontend, or data analysis and have completed plenty of coursework—yet still have nothing a real person can use, test, and hear you explain. BuildBuddy began from a gap familiar to many students at China's 985/211 universities: learning plenty without a path from knowledge to a real user. The school label is context, not an entry requirement.
 
 Some students want credible portfolio evidence. Others see people earn from websites, small tools, or indie products and want to test a first software-income hypothesis. Either way, the missing step is usually not another tutorial; it is choosing one reachable problem, finding a first user, and making the first release small enough to finish.
 
-Big Jump is for that gap between “I have learned things” and “I shipped something real.” It does not offer a list of supposedly profitable apps or promise that finishing a website creates income. A website is only a delivery surface. The real sequence is to test whether someone has a concrete problem, whether the smallest release solves it, whether they return, and whether they actually choose to pay.
+BuildBuddy is for that gap between “I have learned things” and “I shipped something real.” It does not offer a list of supposedly profitable apps or promise that finishing a website creates income. A website is only a delivery surface. The real sequence is to test whether someone has a concrete problem, whether the smallest release solves it, whether they return, and whether they actually choose to pay.
 
 It reduces the first step to:
 
@@ -35,17 +37,17 @@ It is no longer a static-website recipe. It can route and combine:
 - mobile and desktop applications;
 - substantial changes inside an existing repository.
 
-A successful release might be a public site, a tested API, an installable CLI, a reproducible model, a packaged library, or an app build. Big Jump does not force every idea into a public URL.
+A successful release might be a public site, a tested API, an installable CLI, a reproducible model, a packaged library, or an app build. BuildBuddy does not force every idea into a public URL.
 
 ## Three-step start
 
 1. **Install** — clone this repository and run `bash install.sh`.
 2. **Describe the outcome or your situation** — with a direction, say “Build a CLI that safely renames photos from EXIF dates”; without one, say “I know some Python and want a first real project—help me choose from problems around me.”
-3. **Review the evidence** — Big Jump implements locally, runs stack-appropriate checks, records limitations, and asks before unapproved external actions.
+3. **Review the evidence** — BuildBuddy implements locally, runs stack-appropriate checks, records limitations, and asks before unapproved external actions.
 
 ## What makes it different
 
-| Generic coding prompt | Big Jump |
+| Generic coding prompt | BuildBuddy |
 |---|---|
 | Picks a familiar framework immediately | Inspects the repository and routes by the product's real entry point |
 | Uses the same test recipe everywhere | Chooses browser, API, subprocess, data, consumer-install, or simulator evidence as appropriate |
@@ -87,21 +89,21 @@ This progressive layout keeps irrelevant stack instructions out of the agent's c
 bash install.sh
 ```
 
-The installer copies the complete skill—not only `SKILL.md`—to `${CODEX_HOME}/skills/big-jump/` when `CODEX_HOME` is set, otherwise to `~/.codex/skills/big-jump/`. It stages and validates the whole update before replacing the prior version, rejects unsafe symlink layouts, and records a content fingerprint. Re-run it to update.
+The installer copies the complete skill—not only `SKILL.md`—to `${CODEX_HOME}/skills/buildbuddy/` when `CODEX_HOME` is set, otherwise to `~/.codex/skills/buildbuddy/`. It stages and validates the whole update before replacing the prior version, rejects unsafe symlink layouts, and records a content fingerprint. Re-run it to update.
 
-The destination directory must be named `big-jump`; the installer refuses any other name so it cannot silently land in the wrong folder. To install somewhere else, point `BIG_JUMP_SKILL_DIR` at a path that ends in `big-jump`:
+The destination directory must be named `buildbuddy`; the installer refuses any other name so it cannot silently land in the wrong folder. To install somewhere else, point `BUILDBUDDY_SKILL_DIR` at a path that ends in `buildbuddy`:
 
 ```bash
-BIG_JUMP_SKILL_DIR=/my/own/skills/big-jump bash install.sh
+BUILDBUDDY_SKILL_DIR=/my/own/skills/buildbuddy bash install.sh
 ```
 
 ### skills.sh (any Agent Skills-compatible tool)
 
 ```bash
-npx skills add lysanderphong/big-jump
+npx skills add lysanderphong/buildbuddy
 ```
 
-Works with Claude Code, Cursor, Codex, and every other agent supported by [skills.sh](https://skills.sh/LysanderPhong/big-jump).
+Works with Claude Code, Cursor, Codex, and every other agent supported by [skills.sh](https://skills.sh/LysanderPhong/buildbuddy).
 
 ### Other Agent Skills-compatible tools
 
@@ -117,11 +119,11 @@ Copy the whole repository skill set—`SKILL.md`, `references/`, `assets/`, `age
 
 > Create a Flutter habit tracker for Android and iOS. I have no Apple signing credentials, so report exactly what you can verify.
 
-If the skill is not selected automatically, say: **“Use the big-jump skill.”**
+If the skill is not selected automatically, say: **“Use the buildbuddy skill.”**
 
 ## Design influences
 
-Big Jump uses newly written instructions and templates while adapting general workflow ideas from [OpenAI's current skill guidance](https://learn.chatgpt.com/docs/build-skills), the [Agent Skills standard](https://github.com/agentskills/agentskills), [GitHub Spec Kit](https://github.com/github/spec-kit), [Anthropic's skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator), and [Superpowers](https://github.com/obra/superpowers). The synthesis emphasizes progressive disclosure, outcome-first planning, stack-native verification, realistic evals, and fresh evidence before completion claims.
+BuildBuddy uses newly written instructions and templates while adapting general workflow ideas from [OpenAI's current skill guidance](https://learn.chatgpt.com/docs/build-skills), the [Agent Skills standard](https://github.com/agentskills/agentskills), [GitHub Spec Kit](https://github.com/github/spec-kit), [Anthropic's skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator), and [Superpowers](https://github.com/obra/superpowers). The synthesis emphasizes progressive disclosure, outcome-first planning, stack-native verification, realistic evals, and fresh evidence before completion claims.
 
 No third-party skill text or templates are bundled here.
 

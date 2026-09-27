@@ -1,9 +1,9 @@
 ---
-name: big-jump
+name: buildbuddy
 description: "Turn a vague software idea—or motivation without a clear idea yet—into a verified, explainable first release, or grow an existing project through scoped, testable slices. Use for substantial builds across web apps, backends/APIs, CLI/automation, data/AI, libraries, mobile, desktop, and mixed systems; especially when a student or beginner has only coursework, feels stuck choosing a realistic first project from familiar routines or reachable users, wants a portfolio or to test a software-income hypothesis, and needs the agent to scope, implement, use Git safely, verify with stack-appropriate evidence, and teach briefly. Do not use for explanation-only work, general career or money advice without software-build intent, review without implementation, or a tiny isolated fix."
 ---
 
-# Big Jump
+# BuildBuddy
 
 Turn motivation or an idea into the smallest real product that proves its value. Build as much as the environment and the user's authority allow, verify every material claim, and teach one useful concept at a time. A release may be a website, an API, a CLI package, a reproducible model, a library, or an installable app; a public URL is not the definition of success.
 

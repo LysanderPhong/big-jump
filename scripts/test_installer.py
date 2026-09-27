@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regression tests for the atomic Big Jump installer."""
+"""Regression tests for the atomic BuildBuddy installer."""
 
 from __future__ import annotations
 
@@ -29,19 +29,19 @@ def run_install(
     should_succeed: bool,
 ) -> subprocess.CompletedProcess[str]:
     env = os.environ.copy()
-    env["BIG_JUMP_SKILL_DIR"] = str(destination)
+    env["BUILDBUDDY_SKILL_DIR"] = str(destination)
     if source is None:
-        env.pop("BIG_JUMP_SOURCE_DIR", None)
+        env.pop("BUILDBUDDY_SOURCE_DIR", None)
     else:
-        env["BIG_JUMP_SOURCE_DIR"] = str(source)
+        env["BUILDBUDDY_SOURCE_DIR"] = str(source)
     if python_bin is None:
-        env.pop("BIG_JUMP_PYTHON", None)
+        env.pop("BUILDBUDDY_PYTHON", None)
     else:
-        env["BIG_JUMP_PYTHON"] = python_bin
+        env["BUILDBUDDY_PYTHON"] = python_bin
     if archive_url is None:
-        env.pop("BIG_JUMP_ARCHIVE_URL", None)
+        env.pop("BUILDBUDDY_ARCHIVE_URL", None)
     else:
-        env["BIG_JUMP_ARCHIVE_URL"] = archive_url
+        env["BUILDBUDDY_ARCHIVE_URL"] = archive_url
     if extra_env:
         env.update(extra_env)
     selected_script = script_path or (ROOT / "install.sh")
@@ -63,7 +63,7 @@ def run_install(
 
 
 def copy_source(parent: Path) -> Path:
-    destination = parent / "big-jump"
+    destination = parent / "buildbuddy"
     shutil.copytree(
         ROOT,
         destination,
@@ -126,7 +126,7 @@ def assert_fingerprint_matches(destination: Path) -> None:
 
 
 def test_clean_and_repeat_update(temp_root: Path) -> None:
-    destination = temp_root / "clean" / "big-jump"
+    destination = temp_root / "clean" / "buildbuddy"
     result = run_install(destination, should_succeed=True)
     assert "Content fingerprint:" in result.stdout
     assert_runtime_matches(ROOT, destination)
@@ -144,12 +144,12 @@ def test_standalone_archive_install(temp_root: Path) -> None:
     standalone.mkdir()
     script_path = standalone / "install.sh"
     shutil.copy2(ROOT / "install.sh", script_path)
-    archive = temp_root / "big-jump-main.tar.gz"
+    archive = temp_root / "buildbuddy-main.tar.gz"
     with tarfile.open(archive, "w:gz") as bundle:
         for entry in RUNTIME_ENTRIES:
-            bundle.add(ROOT / entry, arcname=f"big-jump-main/{entry}")
+            bundle.add(ROOT / entry, arcname=f"buildbuddy-main/{entry}")
 
-    destination = temp_root / "archive-target" / "big-jump"
+    destination = temp_root / "archive-target" / "buildbuddy"
     run_install(
         destination,
         script_path=script_path,
@@ -160,7 +160,7 @@ def test_standalone_archive_install(temp_root: Path) -> None:
 
 
 def test_invalid_update_preserves_previous_version(temp_root: Path) -> None:
-    destination = temp_root / "rollback" / "big-jump"
+    destination = temp_root / "rollback" / "buildbuddy"
     run_install(destination, source=ROOT, should_succeed=True)
     before = tree_digest(destination)
 
@@ -185,13 +185,13 @@ def test_empty_runtime_source_fails_closed(temp_root: Path) -> None:
     ):
         source = copy_source(temp_root / f"empty-source-{index}")
         (source / relative_path).write_text("", encoding="utf-8")
-        destination = temp_root / f"empty-target-{index}" / "big-jump"
+        destination = temp_root / f"empty-target-{index}" / "buildbuddy"
         run_install(destination, source=source, should_succeed=False)
         assert not destination.exists(), f"installer accepted empty runtime file: {relative_path}"
 
 
 def test_concurrent_target_preserves_backup_without_nesting(temp_root: Path) -> None:
-    destination = temp_root / "concurrent-target" / "big-jump"
+    destination = temp_root / "concurrent-target" / "buildbuddy"
     run_install(destination, source=ROOT, should_succeed=True)
     before = tree_digest(destination)
 
@@ -201,11 +201,11 @@ def test_concurrent_target_preserves_backup_without_nesting(temp_root: Path) -> 
         "import os\n"
         "import sys\n"
         "if (len(sys.argv) >= 5 and sys.argv[1] == '-c' "
-        "and 'os.rename' in sys.argv[2] and '.big-jump-stage.' in sys.argv[3]):\n"
+        "and 'os.rename' in sys.argv[2] and '.buildbuddy-stage.' in sys.argv[3]):\n"
         "    os.mkdir(sys.argv[4])\n"
         "    with open(os.path.join(sys.argv[4], 'concurrent-sentinel'), 'w') as handle:\n"
         "        handle.write('do not overwrite')\n"
-        "real_python = os.environ['BIG_JUMP_REAL_PYTHON']\n"
+        "real_python = os.environ['BUILDBUDDY_REAL_PYTHON']\n"
         "os.execv(real_python, [real_python, *sys.argv[1:]])\n",
         encoding="utf-8",
     )
@@ -215,19 +215,19 @@ def test_concurrent_target_preserves_backup_without_nesting(temp_root: Path) -> 
         destination,
         source=ROOT,
         python_bin=str(shim),
-        extra_env={"BIG_JUMP_REAL_PYTHON": sys.executable},
+        extra_env={"BUILDBUDDY_REAL_PYTHON": sys.executable},
         should_succeed=False,
     )
     assert (destination / "concurrent-sentinel").is_file()
-    assert not (destination / "big-jump").exists(), "staging was nested into a concurrent target"
-    backups = list(destination.parent.glob(".big-jump-backup.*/big-jump"))
+    assert not (destination / "buildbuddy").exists(), "staging was nested into a concurrent target"
+    backups = list(destination.parent.glob(".buildbuddy-backup.*/buildbuddy"))
     assert len(backups) == 1, "the prior installation backup was not preserved"
     assert tree_digest(backups[0]) == before, "the preserved backup changed"
     assert "previous installation is preserved" in result.stdout.lower()
 
 
 def test_destination_symlink_is_rejected(temp_root: Path) -> None:
-    destination = temp_root / "destination-link" / "big-jump"
+    destination = temp_root / "destination-link" / "buildbuddy"
     run_install(destination, source=ROOT, should_succeed=True)
     outside = temp_root / "outside-destination"
     outside.mkdir()
@@ -244,7 +244,7 @@ def test_source_symlink_is_rejected(temp_root: Path) -> None:
     shutil.copytree(source / "agents", outside)
     shutil.rmtree(source / "agents")
     (source / "agents").symlink_to(outside, target_is_directory=True)
-    destination = temp_root / "source-link-target" / "big-jump"
+    destination = temp_root / "source-link-target" / "buildbuddy"
 
     run_install(destination, source=source, should_succeed=False)
     assert not destination.exists(), "installer accepted a source symlink"
@@ -256,13 +256,13 @@ def test_source_target_relationships_are_rejected(temp_root: Path) -> None:
     run_install(source, source=source, should_succeed=False)
     assert tree_digest(source) == before, "source==destination changed the source"
 
-    nested = source / "nested" / "big-jump"
+    nested = source / "nested" / "buildbuddy"
     run_install(nested, source=source, should_succeed=False)
     assert not nested.exists(), "installer created a destination inside its source"
 
 
 def test_missing_python_fails_closed(temp_root: Path) -> None:
-    destination = temp_root / "no-python" / "big-jump"
+    destination = temp_root / "no-python" / "buildbuddy"
     missing_python = str(temp_root / "missing-python")
     run_install(
         destination,
@@ -274,7 +274,7 @@ def test_missing_python_fails_closed(temp_root: Path) -> None:
 
 
 def main() -> int:
-    with tempfile.TemporaryDirectory(prefix="big-jump-installer-tests-") as temp:
+    with tempfile.TemporaryDirectory(prefix="buildbuddy-installer-tests-") as temp:
         temp_root = Path(temp)
         test_clean_and_repeat_update(temp_root)
         test_standalone_archive_install(temp_root)

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Negative regression tests for the Big Jump structural validator."""
+"""Negative regression tests for the BuildBuddy structural validator."""
 
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def copy_skill(parent: Path, name: str = "big-jump") -> Path:
+def copy_skill(parent: Path, name: str = "buildbuddy") -> Path:
     destination = parent / name
     shutil.copytree(
         ROOT,
@@ -40,7 +40,7 @@ def validate(root: Path, should_succeed: bool) -> None:
 
 
 def main() -> int:
-    with tempfile.TemporaryDirectory(prefix="big-jump-validator-tests-") as temp:
+    with tempfile.TemporaryDirectory(prefix="buildbuddy-validator-tests-") as temp:
         temp_root = Path(temp)
 
         invalid_yaml = copy_skill(temp_root / "invalid-yaml")

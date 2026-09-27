@@ -1,10 +1,12 @@
-# Big Jump 🚀
+# BuildBuddy 🚀
+
+原名 **Big Jump**，现在统一更名为 **BuildBuddy**。调用名改为 `$buildbuddy`，新安装目录为 `buildbuddy`；已有安装不会自动改名。
 
 > **从“不知道做什么”，到第一个验证过的软件产品。**
 
-[![check-skill](https://github.com/LysanderPhong/big-jump/actions/workflows/check-skill.yml/badge.svg)](https://github.com/LysanderPhong/big-jump/actions/workflows/check-skill.yml) · 🌐 [网站](https://lysanderphong.github.io/big-jump/index.zh.html) · [English README](README.md)
+[![check-skill](https://github.com/LysanderPhong/buildbuddy/actions/workflows/check-skill.yml/badge.svg)](https://github.com/LysanderPhong/buildbuddy/actions/workflows/check-skill.yml) · 🌐 [网站](https://lysanderphong.github.io/buildbuddy/index.zh.html) · [English README](README.md)
 
-Big Jump 把编程 Agent 变成一个自主执行的“建设者 + 教练”。你可以给它一个模糊想法，也可以只说自己会什么、身边有什么麻烦，以及想做作品集还是尝试第一笔软件收入。它会先帮你选方向，再收缩出最小可用版本、选择实际路线、按可测试的切片实现，并通过真实入口验证。
+BuildBuddy 把编程 Agent 变成一个自主执行的“建设者 + 教练”。你可以给它一个模糊想法，也可以只说自己会什么、身边有什么麻烦，以及想做作品集还是尝试第一笔软件收入。它会先帮你选方向，再收缩出最小可用版本、选择实际路线、按可测试的切片实现，并通过真实入口验证。
 
 ## 写给学过编程、却还没做出真实项目的学生
 
@@ -12,7 +14,7 @@ Big Jump 把编程 Agent 变成一个自主执行的“建设者 + 教练”。�
 
 有人想做一份可信的作品集，也有人看到别人接网页单、卖小工具或做独立产品后，想试着获得第一笔软件收入。无论动机是什么，真正缺的通常不是更多教程，而是选出一个接触得到的问题、找到首位用户，并把第一版做小。
 
-Big Jump 就是为这种“学过不少，却缺第一条落地路径”的时刻准备的。它不会给你一串所谓“暴利项目”，也不承诺写完网页就能赚钱。网站只是交付形式；真正需要依次验证的是：谁有一个具体问题、最小版本能不能解决、对方会不会继续使用，以及是否真的愿意付费。
+BuildBuddy 就是为这种“学过不少，却缺第一条落地路径”的时刻准备的。它不会给你一串所谓“暴利项目”，也不承诺写完网页就能赚钱。网站只是交付形式；真正需要依次验证的是：谁有一个具体问题、最小版本能不能解决、对方会不会继续使用，以及是否真的愿意付费。
 
 它会把第一步缩成：
 
@@ -35,17 +37,17 @@ Big Jump 就是为这种“学过不少，却缺第一条落地路径”的时�
 - 移动端和桌面端应用；
 - 在已有代码仓库中完成较大的功能改造。
 
-最终交付可以是公网网站、经过测试的 API、可安装 CLI、可复现实验或模型、打包好的库，也可以是 App 构建产物。Big Jump 不会强迫所有项目最后都变成一个网址。
+最终交付可以是公网网站、经过测试的 API、可安装 CLI、可复现实验或模型、打包好的库，也可以是 App 构建产物。BuildBuddy 不会强迫所有项目最后都变成一个网址。
 
 ## 三步上手
 
 1. **安装** —— 克隆仓库后运行 `bash install.sh`。
 2. **说出结果或处境** —— 有方向可以说：“做一个根据 EXIF 日期安全重命名照片的 CLI”；没方向可以说：“我会一点 Python，想做第一个真实项目，先帮我从身边问题里选一个。”
-3. **检查证据** —— Big Jump 在本地实现、运行符合技术栈的检查、说明没验证到的部分，并在尚未授权的外部操作前停下来。
+3. **检查证据** —— BuildBuddy 在本地实现、运行符合技术栈的检查、说明没验证到的部分，并在尚未授权的外部操作前停下来。
 
 ## 它和普通编程提示词的区别
 
-| 普通编程提示词 | Big Jump |
+| 普通编程提示词 | BuildBuddy |
 |---|---|
 | 立刻选择一个熟悉的框架 | 先检查仓库，再按产品的真实入口选择路线 |
 | 所有项目套同一套测试 | 分别使用浏览器、API、子进程、数据、干净安装或模拟器证据 |
@@ -89,19 +91,19 @@ bash install.sh
 
 安装器会先在目标旁边搭好并校验完整技能，再替换旧版本；它会拒绝危险的软链接目录，并记录内容指纹。以后重新运行即可安全更新，不再只下载单独的 `SKILL.md`。
 
-目标目录名必须叫 `big-jump`：安装器会拒绝其他名称，避免误装到错误的文件夹。如果要装到别的位置，请把 `BIG_JUMP_SKILL_DIR` 指向一个以 `big-jump` 结尾的路径：
+目标目录名必须叫 `buildbuddy`：安装器会拒绝其他名称，避免误装到错误的文件夹。如果要装到别的位置，请把 `BUILDBUDDY_SKILL_DIR` 指向一个以 `buildbuddy` 结尾的路径：
 
 ```bash
-BIG_JUMP_SKILL_DIR=/my/own/skills/big-jump bash install.sh
+BUILDBUDDY_SKILL_DIR=/my/own/skills/buildbuddy bash install.sh
 ```
 
 ### skills.sh（任何兼容 Agent Skills 的工具）
 
 ```bash
-npx skills add lysanderphong/big-jump
+npx skills add lysanderphong/buildbuddy
 ```
 
-适用于 Claude Code、Cursor、Codex 以及 [skills.sh](https://skills.sh/LysanderPhong/big-jump) 支持的所有其他智能体。
+适用于 Claude Code、Cursor、Codex 以及 [skills.sh](https://skills.sh/LysanderPhong/buildbuddy) 支持的所有其他智能体。
 
 ### 其他兼容 Agent Skills 的工具
 
@@ -117,11 +119,11 @@ npx skills add lysanderphong/big-jump
 
 > 做一个 Android 和 iOS 的 Flutter 习惯打卡器。我没有 Apple 签名凭证，请准确说明实际验证了什么。
 
-如果没有自动触发，可以直接说：**“使用 big-jump 这个 skill。”**
+如果没有自动触发，可以直接说：**“使用 buildbuddy 这个 skill。”**
 
 ## 设计来源
 
-Big Jump 使用全新编写的指令与模板，只吸收了 [OpenAI 当前技能规范](https://learn.chatgpt.com/docs/build-skills)、[Agent Skills 标准](https://github.com/agentskills/agentskills)、[GitHub Spec Kit](https://github.com/github/spec-kit)、[Anthropic skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator) 和 [Superpowers](https://github.com/obra/superpowers) 的通用流程思想，包括渐进加载、结果优先的规划、符合技术栈的验证、真实场景评测，以及“先有新鲜证据再声称完成”。
+BuildBuddy 使用全新编写的指令与模板，只吸收了 [OpenAI 当前技能规范](https://learn.chatgpt.com/docs/build-skills)、[Agent Skills 标准](https://github.com/agentskills/agentskills)、[GitHub Spec Kit](https://github.com/github/spec-kit)、[Anthropic skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator) 和 [Superpowers](https://github.com/obra/superpowers) 的通用流程思想，包括渐进加载、结果优先的规划、符合技术栈的验证、真实场景评测，以及“先有新鲜证据再声称完成”。
 
 仓库没有打包或直接复制第三方技能原文与模板。
 

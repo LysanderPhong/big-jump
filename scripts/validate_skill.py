@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate Big Jump without third-party Python packages."""
+"""Validate BuildBuddy without third-party Python packages."""
 
 from __future__ import annotations
 
@@ -128,8 +128,8 @@ def validate_openai_yaml(root: Path) -> None:
     if not 25 <= len(short) <= 64:
         fail("openai.yaml short_description must be 25-64 characters")
     prompt = values["default_prompt"]
-    if "$big-jump" not in prompt:
-        fail("openai.yaml default_prompt must mention $big-jump")
+    if "$buildbuddy" not in prompt:
+        fail("openai.yaml default_prompt must mention $buildbuddy")
 
 
 def validate_runtime_files(root: Path) -> None:
@@ -305,7 +305,7 @@ def main() -> int:
     if fingerprint_mode:
         print(content_fingerprint(root))
     else:
-        print("PASS: Big Jump skill structure, metadata, links, and evals are valid")
+        print("PASS: BuildBuddy skill structure, metadata, links, and evals are valid")
     return 0
 
 

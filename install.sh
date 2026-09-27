@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-# Install or update the complete Big Jump skill folder.
+# Install or update the complete BuildBuddy skill folder.
 # Usage: bash install.sh
 set -euo pipefail
 
-REPO_URL="https://github.com/LysanderPhong/big-jump"
-ARCHIVE_URL="${BIG_JUMP_ARCHIVE_URL:-https://codeload.github.com/LysanderPhong/big-jump/tar.gz/refs/heads/main}"
+REPO_URL="https://github.com/LysanderPhong/buildbuddy"
+ARCHIVE_URL="${BUILDBUDDY_ARCHIVE_URL:-https://codeload.github.com/LysanderPhong/buildbuddy/tar.gz/refs/heads/main}"
 SCRIPT_DIR="$(cd -- "$(dirname -- "$0")" && pwd -P)"
-REQUESTED_SKILL_DIR="${BIG_JUMP_SKILL_DIR:-${CODEX_HOME:-${HOME}/.codex}/skills/big-jump}"
-PYTHON_BIN="${BIG_JUMP_PYTHON:-python3}"
+REQUESTED_SKILL_DIR="${BUILDBUDDY_SKILL_DIR:-${CODEX_HOME:-${HOME}/.codex}/skills/buildbuddy}"
+PYTHON_BIN="${BUILDBUDDY_PYTHON:-python3}"
 DOWNLOAD_DIR=""
 STAGING_PARENT=""
 BACKUP_PARENT=""
@@ -41,15 +41,15 @@ cleanup() {
   trap - EXIT
 
   if [[ ${exit_status} -ne 0 && -n "${BACKUP_PARENT}" \
-    && -e "${BACKUP_PARENT}/big-jump" && ! -e "${SKILL_DIR:-}" ]]; then
+    && -e "${BACKUP_PARENT}/buildbuddy" && ! -e "${SKILL_DIR:-}" ]]; then
     if ! "${PYTHON_BIN}" -c 'import os, sys; os.rename(sys.argv[1], sys.argv[2])' \
-      "${BACKUP_PARENT}/big-jump" "${SKILL_DIR}"; then
-      echo "Recovery failed: the previous installation remains at ${BACKUP_PARENT}/big-jump" >&2
+      "${BACKUP_PARENT}/buildbuddy" "${SKILL_DIR}"; then
+      echo "Recovery failed: the previous installation remains at ${BACKUP_PARENT}/buildbuddy" >&2
     fi
   elif [[ ${exit_status} -ne 0 && ${SWAP_STARTED} -eq 1 \
-    && -n "${BACKUP_PARENT}" && -e "${BACKUP_PARENT}/big-jump" ]]; then
+    && -n "${BACKUP_PARENT}" && -e "${BACKUP_PARENT}/buildbuddy" ]]; then
     echo "Install aborted because the destination changed during replacement." >&2
-    echo "The previous installation is preserved at ${BACKUP_PARENT}/big-jump" >&2
+    echo "The previous installation is preserved at ${BACKUP_PARENT}/buildbuddy" >&2
   fi
 
   if [[ -n "${STAGING_PARENT}" && -d "${STAGING_PARENT}" ]]; then
@@ -62,7 +62,7 @@ cleanup() {
     && -d "${BACKUP_PARENT}" ]]; then
     rm -rf -- "${BACKUP_PARENT}"
   elif [[ -n "${BACKUP_PARENT}" && -d "${BACKUP_PARENT}" \
-    && ! -e "${BACKUP_PARENT}/big-jump" ]]; then
+    && ! -e "${BACKUP_PARENT}/buildbuddy" ]]; then
     rmdir -- "${BACKUP_PARENT}" 2>/dev/null || true
   fi
 
@@ -82,8 +82,8 @@ if [[ -L "${REQUESTED_SKILL_DIR}" ]]; then
 fi
 
 SKILL_DIR="$("${PYTHON_BIN}" -c 'import os, sys; print(os.path.realpath(sys.argv[1]))' "${REQUESTED_SKILL_DIR}")"
-if [[ "$(basename -- "${SKILL_DIR}")" != "big-jump" ]]; then
-  fail "the destination directory must be named big-jump: ${SKILL_DIR}. To install elsewhere, set BIG_JUMP_SKILL_DIR to a path ending in /big-jump, for example BIG_JUMP_SKILL_DIR=/my/own/skills/big-jump"
+if [[ "$(basename -- "${SKILL_DIR}")" != "buildbuddy" ]]; then
+  fail "the destination directory must be named buildbuddy: ${SKILL_DIR}. To install elsewhere, set BUILDBUDDY_SKILL_DIR to a path ending in /buildbuddy, for example BUILDBUDDY_SKILL_DIR=/my/own/skills/buildbuddy"
 fi
 SKILL_PARENT="$(dirname -- "${SKILL_DIR}")"
 
@@ -95,12 +95,12 @@ looks_like_complete_source() {
   done
 }
 
-if [[ -n "${BIG_JUMP_SOURCE_DIR:-}" ]]; then
-  if [[ -L "${BIG_JUMP_SOURCE_DIR}" ]]; then
-    fail "the source directory must not be a symbolic link: ${BIG_JUMP_SOURCE_DIR}"
+if [[ -n "${BUILDBUDDY_SOURCE_DIR:-}" ]]; then
+  if [[ -L "${BUILDBUDDY_SOURCE_DIR}" ]]; then
+    fail "the source directory must not be a symbolic link: ${BUILDBUDDY_SOURCE_DIR}"
   fi
-  [[ -d "${BIG_JUMP_SOURCE_DIR}" ]] || fail "source directory not found: ${BIG_JUMP_SOURCE_DIR}"
-  SOURCE_DIR="$(cd -- "${BIG_JUMP_SOURCE_DIR}" && pwd -P)"
+  [[ -d "${BUILDBUDDY_SOURCE_DIR}" ]] || fail "source directory not found: ${BUILDBUDDY_SOURCE_DIR}"
+  SOURCE_DIR="$(cd -- "${BUILDBUDDY_SOURCE_DIR}" && pwd -P)"
   SOURCE_LABEL="explicit local source ${SOURCE_DIR}"
 elif looks_like_complete_source "${SCRIPT_DIR}"; then
   SOURCE_DIR="${SCRIPT_DIR}"
@@ -109,10 +109,10 @@ else
   command -v curl >/dev/null 2>&1 || fail "curl is required when install.sh is run outside a checkout"
   command -v tar >/dev/null 2>&1 || fail "tar is required when install.sh is run outside a checkout"
   DOWNLOAD_DIR="$(mktemp -d)"
-  curl -fsSL "${ARCHIVE_URL}" -o "${DOWNLOAD_DIR}/big-jump.tar.gz"
-  tar -xzf "${DOWNLOAD_DIR}/big-jump.tar.gz" -C "${DOWNLOAD_DIR}"
-  mv -- "${DOWNLOAD_DIR}/big-jump-main" "${DOWNLOAD_DIR}/big-jump"
-  SOURCE_DIR="${DOWNLOAD_DIR}/big-jump"
+  curl -fsSL "${ARCHIVE_URL}" -o "${DOWNLOAD_DIR}/buildbuddy.tar.gz"
+  tar -xzf "${DOWNLOAD_DIR}/buildbuddy.tar.gz" -C "${DOWNLOAD_DIR}"
+  mv -- "${DOWNLOAD_DIR}/buildbuddy-main" "${DOWNLOAD_DIR}/buildbuddy"
+  SOURCE_DIR="${DOWNLOAD_DIR}/buildbuddy"
   SOURCE_LABEL="main-branch archive from ${REPO_URL}"
 fi
 
@@ -158,8 +158,8 @@ if [[ -e "${SKILL_DIR}" ]]; then
 fi
 
 mkdir -p -- "${SKILL_PARENT}"
-STAGING_PARENT="$(mktemp -d "${SKILL_PARENT}/.big-jump-stage.XXXXXX")"
-STAGING_DIR="${STAGING_PARENT}/big-jump"
+STAGING_PARENT="$(mktemp -d "${SKILL_PARENT}/.buildbuddy-stage.XXXXXX")"
+STAGING_DIR="${STAGING_PARENT}/buildbuddy"
 mkdir -- "${STAGING_DIR}"
 cp -- "${SOURCE_DIR}/SKILL.md" "${STAGING_DIR}/SKILL.md"
 for managed_dir in agents assets evals references scripts; do
@@ -194,10 +194,10 @@ SOURCE_LABEL="${SOURCE_LABEL//$'\n'/ }"
 "${PYTHON_BIN}" "${STAGING_DIR}/scripts/validate_skill.py" "${STAGING_DIR}"
 
 if [[ -e "${SKILL_DIR}" ]]; then
-  BACKUP_PARENT="$(mktemp -d "${SKILL_PARENT}/.big-jump-backup.XXXXXX")"
+  BACKUP_PARENT="$(mktemp -d "${SKILL_PARENT}/.buildbuddy-backup.XXXXXX")"
   SWAP_STARTED=1
   "${PYTHON_BIN}" -c 'import os, sys; os.rename(sys.argv[1], sys.argv[2])' \
-    "${SKILL_DIR}" "${BACKUP_PARENT}/big-jump"
+    "${SKILL_DIR}" "${BACKUP_PARENT}/buildbuddy"
 else
   SWAP_STARTED=1
 fi
@@ -210,7 +210,7 @@ if [[ "${FINAL_SHA256}" != "${CONTENT_SHA256}" ]]; then
 fi
 INSTALL_COMPLETE=1
 
-echo "Installed Big Jump to ${SKILL_DIR}"
+echo "Installed BuildBuddy to ${SKILL_DIR}"
 echo "The complete skill includes its profiles, verification playbook, metadata, template, and evals."
 echo "Content fingerprint: ${CONTENT_SHA256}"
 echo "Re-run this script to update. Restart Codex only if the updated skill does not appear automatically."

@@ -1,4 +1,4 @@
-# Evaluating Big Jump
+# Evaluating BuildBuddy
 
 Use `evals.json` for both selection and forward-behavior checks. Run evaluation in a fresh conversation so earlier project context does not hide routing failures.
 
@@ -6,13 +6,13 @@ Use `evals.json` for both selection and forward-behavior checks. Run evaluation 
 
 Give only the prompt to an agent that can discover installed skills.
 
-- A positive case passes when Big Jump is selected and the stated engagement, profiles, and risk overlays match.
-- A negative case passes when Big Jump is not selected and the request is handled by a narrower workflow.
+- A positive case passes when BuildBuddy is selected and the stated engagement, profiles, and risk overlays match.
+- A negative case passes when BuildBuddy is not selected and the request is handled by a narrower workflow.
 - Tune the frontmatter description when selection fails. Do not add body text to fix discovery, because the body is loaded only after selection.
 
 ## Forward-behavior check
 
-Give the agent the raw Big Jump skill plus one positive prompt. Do not tell it what behavior is being diagnosed.
+Give the agent the raw BuildBuddy skill plus one positive prompt. Do not tell it what behavior is being diagnosed.
 
 Grade the first plan and the completed run separately:
 
@@ -25,4 +25,4 @@ Grade the first plan and the completed run separately:
 
 A positive case fails if a `must_avoid` behavior appears, even when the route is correct. Record the smallest instruction change that would prevent the failure, rerun the same case, and then check another profile for regression.
 
-For major revisions, compare the same prompts without Big Jump and with Big Jump. Prefer observable improvements—safer actions, stronger evidence, fewer irrelevant steps—over style preferences.
+For major revisions, compare the same prompts without BuildBuddy and with BuildBuddy. Prefer observable improvements—safer actions, stronger evidence, fewer irrelevant steps—over style preferences.
